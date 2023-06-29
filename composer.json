@@ -1,0 +1,6 @@
+{
+    "require": {
+        "yosymfony/toml": "^1.0",
+        "php-amqplib/php-amqplib": "^2.0"
+    }
+}
