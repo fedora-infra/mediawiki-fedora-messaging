@@ -1,0 +1,10 @@
+amqp_url = "amqp://fedoramessages:fedoramessages@tinystage.tinystage.test"
+topic_prefix = "tinystage"
+
+[tls]
+ca_cert = "/etc/fedora-messaging/cacert.pem"
+keyfile = "/etc/fedora-messaging/fedora-key.pem"
+certfile = "/etc/fedora-messaging/fedora-cert.pem"
+
+[client_properties]
+app = "MediaWiki publisher"

@@ -1,0 +1,13 @@
+- name: Install RPM dependencies
+  dnf:
+    state: present
+    name:
+      - fedora-messaging
+
+- name: Install the configuration file
+  copy:
+    src: config.toml
+    dest: /etc/fedora-messaging/config.toml
+    owner: vagrant
+    group: apache
+    mode: 0640

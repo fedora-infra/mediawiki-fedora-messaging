@@ -1,0 +1,48 @@
+---
+- name: Install RPM packages
+  dnf:
+      name:
+        - git
+        - vim
+        - fedora-messaging
+        - php-mbstring
+      state: present
+
+
+- name: Prepare the bash config dir
+  file:
+      path: /home/vagrant/.bashrc.d/dev
+      state: directory
+      mode: 0755
+      owner: vagrant
+      group: vagrant
+
+
+- name: Install the bash config
+  copy:
+      src: bashrc
+      dest: /home/vagrant/.bashrc.d/dev
+      mode: 0644
+      owner: vagrant
+      group: vagrant
+
+- name: Link the code into MediaWiki's extensions directory
+  file:
+    dest: /usr/share/mediawiki/extensions/FedoraMessaging
+    src: /home/vagrant/dev
+    state: link
+
+- name: Tune SELinux Policy
+  seboolean:
+    name: "{{ item }}"
+    state: yes
+    persistent: yes
+  with_items:
+    - httpd_use_fusefs
+    - httpd_can_network_connect
+
+- name: Allow apache to go into the Vagrant user's home
+  file:
+      path: /home/vagrant
+      state: directory
+      mode: 0755

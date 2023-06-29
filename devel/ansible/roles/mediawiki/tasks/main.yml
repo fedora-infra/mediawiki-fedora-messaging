@@ -1,0 +1,39 @@
+- name: Install RPM dependencies
+  dnf:
+    state: present
+    name:
+      - mediawiki
+      - httpd
+      - mariadb-server
+      - php-mysqlnd
+      - python3-mysqlclient
+
+- name: install httpd config file
+  copy:
+    src: httpd.conf
+    dest: /etc/httpd/conf.d/mediawiki.conf
+  notify:
+    - restart httpd
+
+- name: Start the services
+  systemd:
+    state: started
+    name: "{{ item }}"
+    daemon_reload: yes
+    enabled: yes
+  loop:
+    - php-fpm
+    - httpd
+    - mariadb
+
+- name: Create a database
+  community.mysql.mysql_db:
+    name: wiki
+    state: present
+
+- name: Create database user
+  community.mysql.mysql_user:
+    name: wiki
+    password: wiki
+    priv: 'wiki.*:ALL'
+    state: present
