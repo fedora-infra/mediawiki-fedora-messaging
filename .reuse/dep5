@@ -1,0 +1,14 @@
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Upstream-Name: mediawiki-fedora-messaging
+Upstream-Contact: Fedora Infrastructure <infrastructure@lists.fedoraproject.org>
+Source: https://github.com/fedora-infra/mediawiki-fedora-messaging
+
+# Sample paragraph, commented out:
+#
+# Files: src/*
+# Copyright: $YEAR $NAME <$CONTACT>
+# License: ...
+
+Files: README.md
+Copyright: Contributors to the Fedora Project
+License: LGPL-3.0-or-later
