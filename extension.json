@@ -1,0 +1,26 @@
+{
+        "name": "FedoraMessaging",
+        "author": [
+                "Aurelien Bompard"
+        ],
+        "requires": {
+                "MediaWiki": ">= 1.39.0"
+        },
+        "url": "https://github.com/fedora-infra/mediawiki-fedora-messaging",
+        "description": "A MediaWiki plugin that emits messages to the Fedora Messaging bus",
+        "license-name": "LGPL-3.0-or-later",
+        "type": "other",
+        "AutoloadClasses": {
+                "FedoraMessaging": "FedoraMessaging.php"
+        },
+        "Hooks": {
+                "PageSaveComplete": "FedoraMessaging::onPageSave"
+        },
+        "config": {
+                "FedoraMessagingConfigFile": {
+                        "value": "/etc/fedora-messaging/config.toml"
+                }
+        },
+        "load_composer_autoloader": true,
+        "manifest_version": 2
+}
