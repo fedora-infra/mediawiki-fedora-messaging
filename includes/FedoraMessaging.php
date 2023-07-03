@@ -20,7 +20,8 @@ class FedoraMessaging {
     ) {
         $mwconfig = MediaWikiServices::getInstance()->getConfigFactory()->makeConfig( 'FedoraMessaging' );
         $fmConfigPath = $mwconfig->get( 'FedoraMessagingConfigFile' );
-        $connection = FedoraMessaging::connect($fmConfigPath);
+        $config = Toml::ParseFile($fmConfigPath);
+        $connection = FedoraMessaging::connect($config);
         $channel = $connection->channel();
 
         //$metadata = $renderedRevision->getSlotParserOutput("main", ["generate-html" => false]);
@@ -81,8 +82,7 @@ class FedoraMessaging {
         $connection->close();
     }
 
-    public static function connect($configPath) {
-        $config = Toml::ParseFile($configPath);
+    public static function connect($config) {
         $amqp_url = parse_url($config["amqp_url"]);
 
         $connectionConfig = new AMQPConnectionConfig();
