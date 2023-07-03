@@ -101,6 +101,12 @@ class FedoraMessaging {
             $connectionConfig->setSslCaCert($config["tls"]["ca_cert"]);
             $connectionConfig->setSslCert($config["tls"]["certfile"]);
             $connectionConfig->setSslKey($config["tls"]["keyfile"]);
+            $connectionConfig->setUser("");
+            $connectionConfig->setPassword("");
+            $connectionConfig->setSslVerify(true);
+            $connectionConfig->setSslVerifyName(false);
+            $connectionConfig->setNetworkProtocol("ssl");
+            $connectionConfig->setLoginMethod(AMQPConnectionConfig::AUTH_EXTERNAL);
         }
 
         return AMQPConnectionFactory::create($connectionConfig);
