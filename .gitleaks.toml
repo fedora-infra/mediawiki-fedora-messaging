@@ -1,0 +1,5 @@
+[allowlist]
+regexTarget = "match"
+regexes = [
+  "amqp://fedoramessages:fedoramessages@tinystage.tinystage.test", # used for dev vagrant box
+]
