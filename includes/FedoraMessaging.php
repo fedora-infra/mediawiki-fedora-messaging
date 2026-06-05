@@ -27,12 +27,11 @@ class FedoraMessaging {
         //$metadata = $renderedRevision->getSlotParserOutput("main", ["generate-html" => false]);
         //print_r($metadata);
         $revisionRecord = $renderedRevision->getRevision();
-        $title = $revisionRecord->getPage();
-        if ( $title->getNsText() ) {
-            $titletext = $title->getNsText() . ":" . $title->getText();
-        } else {
-            $titletext = $title->getText();
-        }
+        $page = $revisionRecord->getPage();
+        $titleFactory = MediaWikiServices::getInstance()->getTitleFactory();
+        $title = $titleFactory->newFromPageIdentity( $page );
+        $titletext  = $title->getPrefixedText();
+
         $prevRevId = $revisionRecord->getParentId();
         $curRevId = $prevRevId + 1; // We don't know that! But it's not committed yet so we can only assume.
         $url = $title->getFullURL('diff=' . $curRevId . '&oldid=' . $prevRevId);
